@@ -1,7 +1,12 @@
-import pygame
-from random import *
+import pygame, random
+
 
 TITEL = 'Space Wars - 0.0.1'
+
+clock = pygame.time.Clock()
+FPS = 60
+BLACK = 0, 0, 0
+WHITE = 255, 255, 255
 
 SPIELFELD_HOEHE = 700
 SPIELFELD_BREITE = 1200
@@ -22,14 +27,19 @@ RAUMSCHIFF_BREITE = 20
 RAUMSCHIFF_HOEHE = 20
 
 
-def zeichne_stern(x_pos_stern, y_pos_stern):
-    for x in range(STERNE_DURCHMESSER):
-        for y in range(STERNE_DURCHMESSER):
-            SPIELFELD.set_at((x_pos_stern + x, y_pos_stern + y), STERNE_FARBE)
+class Sterne:
+    def __init__(self):
+        self.x = random.randint(0, SPIELFELD_BREITE)
+        self.y = random.randint(0, SPIELFELD_HOEHE)
+
+
+Sternenspeicher = [Sterne()] * STERNE_ANZAHL
+
+
 
 
 for i in range(STERNE_ANZAHL):
-    zeichne_stern(randint(0, SPIELFELD_BREITE), randint(0, SPIELFELD_HOEHE))
+    Sternenspeicher[i] = Sterne()
 
 pygame.display.flip()
 
@@ -61,3 +71,8 @@ while running:
     pygame.draw.rect(SPIELFELD, (255, 0, 0), (RAUMSCHIFF_X_POS, RAUMSCHIFF_Y_POS, RAUMSCHIFF_BREITE, RAUMSCHIFF_HOEHE))
 
     pygame.display.update()
+
+    SPIELFELD.fill(BLACK)
+    for i in Sternenspeicher:
+        pygame.draw.rect(SPIELFELD, WHITE, (i.x, i.y, STERNE_DURCHMESSER, STERNE_DURCHMESSER))
+
