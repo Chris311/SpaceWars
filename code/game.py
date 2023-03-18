@@ -75,5 +75,3 @@ while running:
     SPIELFELD.fill(BLACK)
     for i in Sternenspeicher:
         pygame.draw.rect(SPIELFELD, WHITE, (i.x, i.y, STERNE_DURCHMESSER, STERNE_DURCHMESSER))
-
- # Test
