@@ -45,7 +45,7 @@ spaceship = pygame.image.load('../png/spaceship.png')
 spaceship = pygame.transform.scale(spaceship, (30, 30))
 
 
-def zeichneRaumschiff(x, y):
+def zeichne_raumschiff(x, y):
     SPIELFELD.blit(spaceship, (x, y))
 
 
