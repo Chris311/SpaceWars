@@ -1,7 +1,6 @@
 import pygame
 import random
-
-TITEL = 'Space Wars - 0.0.1'
+import constants
 
 clock = pygame.time.Clock()
 FPS = 60
@@ -19,7 +18,7 @@ STERNE_FARBE = (255, 255, 255)
 pygame.init()
 
 SPIELFELD = pygame.display.set_mode((SPIELFELD_BREITE, SPIELFELD_HOEHE))
-pygame.display.set_caption(TITEL)
+pygame.display.set_caption(constants.TITEL)
 
 RAUMSCHIFF_X_POS = 200
 RAUMSCHIFF_Y_POS = 200
