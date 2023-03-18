@@ -1,6 +1,6 @@
 import pygame
-import random
 import constants
+import sterne
 
 clock = pygame.time.Clock()
 
@@ -12,29 +12,17 @@ spielfeld = pygame.display.set_mode((constants.SPIELFELD_BREITE, constants.SPIEL
 raumschiff_x_pos = 200
 raumschiff_y_pos = 200
 
-
-class Sterne:
-    def __init__(self):
-        self.x = random.randint(0, constants.SPIELFELD_BREITE)
-        self.y = random.randint(0, constants.SPIELFELD_HOEHE)
-
-
-Sternenspeicher = [Sterne()] * constants.STERNE_ANZAHL
-
-for i in range(constants.STERNE_ANZAHL):
-    Sternenspeicher[i] = Sterne()
-
 pygame.display.flip()
 
-running = True
-spaceship = pygame.image.load('../png/spaceship.png')
-spaceship = pygame.transform.scale(spaceship, (30, 30))
+raumschiff = pygame.image.load('../png/spaceship.png')
+raumschiff = pygame.transform.scale(raumschiff, (30, 30))
 
 
 def zeichne_raumschiff(x, y):
-    spielfeld.blit(spaceship, (x, y))
+    spielfeld.blit(raumschiff, (x, y))
 
 
+running = True
 while running:
     pygame.time.delay(10)
 
@@ -61,6 +49,6 @@ while running:
     pygame.display.update()
 
     spielfeld.fill(constants.BLACK)
-    for i in Sternenspeicher:
+    for i in sterne.sternenspeicher:
         pygame.draw.rect(spielfeld, constants.WHITE, (i.x, i.y, constants.STERNE_DURCHMESSER,
                                                       constants.STERNE_DURCHMESSER))
