@@ -7,6 +7,7 @@ clock = pygame.time.Clock()
 FPS = 60
 BLACK = 0, 0, 0
 WHITE = 255, 255, 255
+ROT = (255, 0, 0)
 
 SPIELFELD_HOEHE = 700
 SPIELFELD_BREITE = 1200
@@ -46,6 +47,14 @@ pygame.display.flip()
 
 running = True
 
+
+def zeichneRaumschiff():
+    d1 = (RAUMSCHIFF_X_POS, RAUMSCHIFF_Y_POS)
+    d2 = (RAUMSCHIFF_X_POS + RAUMSCHIFF_BREITE / 2, RAUMSCHIFF_Y_POS + RAUMSCHIFF_HOEHE)
+    d3 = (RAUMSCHIFF_X_POS + RAUMSCHIFF_BREITE, RAUMSCHIFF_Y_POS)
+    pygame.draw.polygon(SPIELFELD, ROT, (d1, d2, d3), 2)
+
+
 while running:
     pygame.time.delay(10)
 
@@ -67,8 +76,7 @@ while running:
     if keys[pygame.K_s] and RAUMSCHIFF_Y_POS < SPIELFELD_HOEHE - RAUMSCHIFF_HOEHE:
         RAUMSCHIFF_Y_POS += RAUMSCHIFF_GESCHWINDIGKEIT
 
-    # drawing object on screen which is rectangle here
-    pygame.draw.rect(SPIELFELD, (255, 0, 0), (RAUMSCHIFF_X_POS, RAUMSCHIFF_Y_POS, RAUMSCHIFF_BREITE, RAUMSCHIFF_HOEHE))
+    zeichneRaumschiff()
 
     pygame.display.update()
 
