@@ -3,39 +3,25 @@ import random
 import constants
 
 clock = pygame.time.Clock()
-FPS = 60
-BLACK = 0, 0, 0
-WHITE = 255, 255, 255
-ROT = (255, 0, 0)
-
-SPIELFELD_HOEHE = 700
-SPIELFELD_BREITE = 1200
-
-STERNE_DURCHMESSER = 5
-STERNE_ANZAHL = 20
-STERNE_FARBE = (255, 255, 255)
 
 pygame.init()
-
-SPIELFELD = pygame.display.set_mode((SPIELFELD_BREITE, SPIELFELD_HOEHE))
 pygame.display.set_caption(constants.TITEL)
 
-RAUMSCHIFF_X_POS = 200
-RAUMSCHIFF_Y_POS = 200
-RAUMSCHIFF_GESCHWINDIGKEIT = 10
-RAUMSCHIFF_BREITE = 20
-RAUMSCHIFF_HOEHE = 20
+spielfeld = pygame.display.set_mode((constants.SPIELFELD_BREITE, constants.SPIELFELD_HOEHE))
+
+raumschiff_x_pos = 200
+raumschiff_y_pos = 200
 
 
 class Sterne:
     def __init__(self):
-        self.x = random.randint(0, SPIELFELD_BREITE)
-        self.y = random.randint(0, SPIELFELD_HOEHE)
+        self.x = random.randint(0, constants.SPIELFELD_BREITE)
+        self.y = random.randint(0, constants.SPIELFELD_HOEHE)
 
 
-Sternenspeicher = [Sterne()] * STERNE_ANZAHL
+Sternenspeicher = [Sterne()] * constants.STERNE_ANZAHL
 
-for i in range(STERNE_ANZAHL):
+for i in range(constants.STERNE_ANZAHL):
     Sternenspeicher[i] = Sterne()
 
 pygame.display.flip()
@@ -46,7 +32,7 @@ spaceship = pygame.transform.scale(spaceship, (30, 30))
 
 
 def zeichne_raumschiff(x, y):
-    SPIELFELD.blit(spaceship, (x, y))
+    spielfeld.blit(spaceship, (x, y))
 
 
 while running:
@@ -58,22 +44,23 @@ while running:
 
     keys = pygame.key.get_pressed()
 
-    if keys[pygame.K_a] and RAUMSCHIFF_X_POS > 0:
-        RAUMSCHIFF_X_POS -= RAUMSCHIFF_GESCHWINDIGKEIT
+    if keys[pygame.K_a] and raumschiff_x_pos > 0:
+        raumschiff_x_pos -= constants.RAUMSCHIFF_GESCHWINDIGKEIT
 
-    if keys[pygame.K_d] and RAUMSCHIFF_X_POS < SPIELFELD_BREITE - RAUMSCHIFF_BREITE:
-        RAUMSCHIFF_X_POS += RAUMSCHIFF_GESCHWINDIGKEIT
+    if keys[pygame.K_d] and raumschiff_x_pos < constants.SPIELFELD_BREITE - constants.RAUMSCHIFF_BREITE:
+        raumschiff_x_pos += constants.RAUMSCHIFF_GESCHWINDIGKEIT
 
-    if keys[pygame.K_w] and RAUMSCHIFF_Y_POS > 0:
-        RAUMSCHIFF_Y_POS -= RAUMSCHIFF_GESCHWINDIGKEIT
+    if keys[pygame.K_w] and raumschiff_y_pos > 0:
+        raumschiff_y_pos -= constants.RAUMSCHIFF_GESCHWINDIGKEIT
 
-    if keys[pygame.K_s] and RAUMSCHIFF_Y_POS < SPIELFELD_HOEHE - RAUMSCHIFF_HOEHE:
-        RAUMSCHIFF_Y_POS += RAUMSCHIFF_GESCHWINDIGKEIT
+    if keys[pygame.K_s] and raumschiff_y_pos < constants.SPIELFELD_HOEHE - constants.RAUMSCHIFF_HOEHE:
+        raumschiff_y_pos += constants.RAUMSCHIFF_GESCHWINDIGKEIT
 
-    zeichneRaumschiff(RAUMSCHIFF_X_POS, RAUMSCHIFF_Y_POS)
+    zeichne_raumschiff(raumschiff_x_pos, raumschiff_y_pos)
 
     pygame.display.update()
 
-    SPIELFELD.fill(BLACK)
+    spielfeld.fill(constants.BLACK)
     for i in Sternenspeicher:
-        pygame.draw.rect(SPIELFELD, WHITE, (i.x, i.y, STERNE_DURCHMESSER, STERNE_DURCHMESSER))
+        pygame.draw.rect(spielfeld, constants.WHITE, (i.x, i.y, constants.STERNE_DURCHMESSER,
+                                                      constants.STERNE_DURCHMESSER))

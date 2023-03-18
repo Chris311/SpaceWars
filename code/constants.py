@@ -1,3 +1,24 @@
 """This module defines project-level constants."""
 
 TITEL = 'Space Wars - 0.0.1'
+
+FPS = 60
+
+# Farben
+BLACK = 0, 0, 0
+WHITE = 255, 255, 255
+ROT = (255, 0, 0)
+
+# Spielfeld
+SPIELFELD_HOEHE = 700
+SPIELFELD_BREITE = 1200
+
+# Sterne
+STERNE_DURCHMESSER = 5
+STERNE_ANZAHL = 20
+STERNE_FARBE = WHITE
+
+# Raumschiff
+RAUMSCHIFF_GESCHWINDIGKEIT = 10
+RAUMSCHIFF_BREITE = 20
+RAUMSCHIFF_HOEHE = 20
