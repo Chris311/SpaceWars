@@ -42,7 +42,7 @@ for i in range(STERNE_ANZAHL):
 pygame.display.flip()
 
 running = True
-spaceship = pygame.image.load('spaceship.png')
+spaceship = pygame.image.load('../png/spaceship.png')
 spaceship = pygame.transform.scale(spaceship, (30, 30))
 
 
