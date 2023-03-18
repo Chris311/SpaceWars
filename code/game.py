@@ -1,5 +1,5 @@
-import pygame, random
-
+import pygame
+import random
 
 TITEL = 'Space Wars - 0.0.1'
 
@@ -36,23 +36,18 @@ class Sterne:
 
 Sternenspeicher = [Sterne()] * STERNE_ANZAHL
 
-
-
-
 for i in range(STERNE_ANZAHL):
     Sternenspeicher[i] = Sterne()
 
 pygame.display.flip()
 
-
 running = True
+spaceship = pygame.image.load('spaceship.png')
+spaceship = pygame.transform.scale(spaceship, (30, 30))
 
 
-def zeichneRaumschiff():
-    d1 = (RAUMSCHIFF_X_POS, RAUMSCHIFF_Y_POS)
-    d2 = (RAUMSCHIFF_X_POS + RAUMSCHIFF_BREITE / 2, RAUMSCHIFF_Y_POS + RAUMSCHIFF_HOEHE)
-    d3 = (RAUMSCHIFF_X_POS + RAUMSCHIFF_BREITE, RAUMSCHIFF_Y_POS)
-    pygame.draw.polygon(SPIELFELD, ROT, (d1, d2, d3), 2)
+def zeichneRaumschiff(x, y):
+    SPIELFELD.blit(spaceship, (x, y))
 
 
 while running:
@@ -76,7 +71,7 @@ while running:
     if keys[pygame.K_s] and RAUMSCHIFF_Y_POS < SPIELFELD_HOEHE - RAUMSCHIFF_HOEHE:
         RAUMSCHIFF_Y_POS += RAUMSCHIFF_GESCHWINDIGKEIT
 
-    zeichneRaumschiff()
+    zeichneRaumschiff(RAUMSCHIFF_X_POS, RAUMSCHIFF_Y_POS)
 
     pygame.display.update()
 
