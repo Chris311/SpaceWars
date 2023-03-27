@@ -15,6 +15,14 @@ STERNE_DURCHMESSER = 5
 STERNE_ANZAHL = 20
 STERNE_FARBE = (255, 255, 255)
 
+
+METEOR_DURCHMESSER = 30
+METEOR_ANZAHL = 3
+METEOR_FARBE = [230, 60, 100]
+METEOR_GESCHWINDICHKEIT_Y = random.randint(0, 10)
+METEOR_GESCHWINDICHKEIT_X = random.randint(-10, 10)
+
+
 pygame.init()
 
 SPIELFELD = pygame.display.set_mode((SPIELFELD_BREITE, SPIELFELD_HOEHE))
@@ -22,17 +30,22 @@ pygame.display.set_caption(TITEL)
 
 RAUMSCHIFF_X_POS = 200
 RAUMSCHIFF_Y_POS = 200
-RAUMSCHIFF_GESCHWINDIGKEIT = 10
-RAUMSCHIFF_BREITE = 20
-RAUMSCHIFF_HOEHE = 20
+RAUMSCHIFF_GESCHWINDIGKEIT = 5
+RAUMSCHIFF_BREITE = 40
+RAUMSCHIFF_HOEHE = 40
+tolerance = RAUMSCHIFF_HOEHE
 
 
 class Sterne:
     def __init__(self):
         self.x = random.randint(0, SPIELFELD_BREITE)
         self.y = random.randint(0, SPIELFELD_HOEHE)
+class Meteor:
+    def __init__(self):
+        self.x = 500
+        self. y = 0
 
-
+Meteorenspeicher = [Meteor()] * METEOR_ANZAHL
 Sternenspeicher = [Sterne()] * STERNE_ANZAHL
 
 
@@ -40,6 +53,9 @@ Sternenspeicher = [Sterne()] * STERNE_ANZAHL
 
 for i in range(STERNE_ANZAHL):
     Sternenspeicher[i] = Sterne()
+
+for i in range(METEOR_ANZAHL):
+    Meteorenspeicher[i] = Meteor()
 
 pygame.display.flip()
 
@@ -76,4 +92,9 @@ while running:
     for i in Sternenspeicher:
         pygame.draw.rect(SPIELFELD, WHITE, (i.x, i.y, STERNE_DURCHMESSER, STERNE_DURCHMESSER))
 
- # Test
+    for i in Meteorenspeicher:
+        i.y += METEOR_GESCHWINDICHKEIT_Y
+        i.x += METEOR_GESCHWINDICHKEIT_X
+        pygame.draw.rect(SPIELFELD, 'brown', (i.x, i.y, METEOR_DURCHMESSER, METEOR_DURCHMESSER))
+        if abs(RAUMSCHIFF_Y_POS - i.y) < tolerance and abs(RAUMSCHIFF_X_POS - i.x) < tolerance:
+            exit()
